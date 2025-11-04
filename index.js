@@ -12,7 +12,6 @@ app.use(express.json());
 // smart-deals
 // vmFIpzbr5cRM1W6l
 
-// const uri = "mongodb+srv://smartDBUser:vmFIpzbr5cRM1W6l@cluster0.w0v9pwr.mongodb.net/?appName=Cluster0";
 const uri = `mongodb+srv://${process.env.BD_USER}:${process.env.DB_PASS}@cluster0.w0v9pwr.mongodb.net/?appName=Cluster0`;
 
 const client = new MongoClient(uri, {
