@@ -26,7 +26,7 @@ const logger = (req, res, next) => {
 };
 
 const verifyFireBaseTOken = async (req, res, next) => {
-    console.log('Verify midleware', req.headers.authorization);
+    // console.log('Verify midleware', req.headers.authorization);
 
     if(!req.headers.authorization){
         return res.status(401).send({message: 'unauthorized access'});
@@ -123,6 +123,7 @@ async function run() {
             res.send(result);
         });
 
+        
         // single product details
         app.get('/products/:id', async (req, res) => {
             const id = req.params.id;
@@ -134,6 +135,7 @@ async function run() {
 
         // Add database related api
         app.post('/products', async (req, res) => {
+            console.log('Header in the post:', req.headers)
             const newProduct = req.body;
             const result = await productsCollection.insertOne(newProduct);
             res.send(result);
@@ -189,18 +191,6 @@ async function run() {
             const result = await cursor.toArray();
             res.send(result);
         });
-
-        // All Bids
-        // app.get('/bids', async (req, res) => {
-        //     const email = req.query.email;
-        //     const query = {};
-        //     if (email){
-        //         query.buyer_email = email;
-        //     }
-        //     const cursor = bidsCollection.find(query);
-        //     const result = await cursor.toArray();
-        //     res.send(result);
-        // });
 
         // Delet Bids
         app.delete('/bids/:id', async (req, res) => {
